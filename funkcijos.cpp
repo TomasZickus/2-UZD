@@ -177,24 +177,54 @@ MatavimoLaikai apdoroti_faila_impl(
                 kietiakai.push_back(A);
         }
     }
+
     else if (strategija == 2) {
 
         // 2 strategija:
         // Vargšiukai perkeliami į naują konteinerį,
         // o iš pradinio studentai konteinerio ištrinami.
 
-        auto it = studentai.begin();
+        if constexpr (std::is_same_v<Konteineris, std::vector<studentas>>) {
 
-        while (it != studentai.end()) {
-            if (it->rez < 5.0) {
-                vargsiukai.push_back(std::move(*it));
-                it = studentai.erase(it);
+            auto pradzia = studentai.begin();
+            auto pabaiga = studentai.end();
+
+            while (pradzia < pabaiga) {
+
+                if (pradzia->rez < 5.0) {
+                    ++pradzia;
+                }
+                else {
+                    --pabaiga;
+
+                    if (pradzia < pabaiga) {
+                        std::swap(*pradzia, *pabaiga);
+                        ++pradzia;
+                    }
+                }
             }
-            else {
-                ++it;
+
+            while (pabaiga != studentai.end()) {
+                vargsiukai.push_back(std::move(studentai.back()));
+                studentai.pop_back();
+            }
+        }
+        else {
+
+            auto it = studentai.begin();
+
+            while (it != studentai.end()) {
+                if (it->rez < 5.0) {
+                    vargsiukai.push_back(std::move(*it));
+                    it = studentai.erase(it);
+                }
+                else {
+                    ++it;
+                }
             }
         }
     }
+
     else if (strategija == 3) {
 
         // 3 strategija:
