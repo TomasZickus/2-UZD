@@ -131,23 +131,26 @@ MatavimoLaikai apdoroti_faila_impl(
 
         std::istringstream iss(eilute);
 
-        studentas A;
+        std::string var, pav;
+        std::vector<int> paz;
         int pazymys;
 
-        if (iss >> A.var >> A.pav) {
+        if (iss >> var >> pav) {
             while (iss >> pazymys)
-                A.paz.push_back(pazymys);
+                paz.push_back(pazymys);
 
-            if (A.paz.empty()) {
-                A.egz = 0;
-            }
-            else {
-                A.egz = A.paz.back();
-                A.paz.pop_back();
+            int egz = 0;
+
+            if (!paz.empty()) {
+                egz = paz.back();
+                paz.pop_back();
             }
 
-            paskaiciuoti_rezultatus(A);
-            studentai.push_back(A);
+            studentas A(var, pav, paz, egz);
+
+            A.paskaiciuoti_rezultatus();
+
+            studentai.push_back(std::move(A));
         }
     }
 
@@ -171,7 +174,7 @@ MatavimoLaikai apdoroti_faila_impl(
         // Studentai kopijuojami į du naujus konteinerius.
 
         for (const studentas& A : studentai) {
-            if (A.rez < 5.0)
+            if (A.rez() < 5.0)
                 vargsiukai.push_back(A);
             else
                 kietiakai.push_back(A);
@@ -191,7 +194,7 @@ MatavimoLaikai apdoroti_faila_impl(
 
             while (pradzia < pabaiga) {
 
-                if (pradzia->rez < 5.0) {
+                if (pradzia->rez() < 5.0) {
                     ++pradzia;
                 }
                 else {
@@ -214,7 +217,7 @@ MatavimoLaikai apdoroti_faila_impl(
             auto it = studentai.begin();
 
             while (it != studentai.end()) {
-                if (it->rez < 5.0) {
+                if (it->rez() < 5.0) {
                     vargsiukai.push_back(std::move(*it));
                     it = studentai.erase(it);
                 }
@@ -236,7 +239,7 @@ MatavimoLaikai apdoroti_faila_impl(
             studentai.end(),
             std::back_inserter(vargsiukai),
             [](const studentas& A) {
-                return A.rez >= 5.0;
+                return A.rez() >= 5.0;
             }
         );
 
@@ -245,7 +248,7 @@ MatavimoLaikai apdoroti_faila_impl(
             studentai.end(),
             std::back_inserter(kietiakai),
             [](const studentas& A) {
-                return A.rez < 5.0;
+                return A.rez() < 5.0;
             }
         );
     }
@@ -265,15 +268,15 @@ MatavimoLaikai apdoroti_faila_impl(
     pradzia = laikrodis::now();
 
     auto pagal_varda = [](const studentas& a, const studentas& b) {
-        return a.var < b.var;
+        return a.var() < b.var();
     };
 
     auto pagal_pavarde = [](const studentas& a, const studentas& b) {
-        return a.pav < b.pav;
+        return a.pav() < b.pav();
     };
 
     auto pagal_rezultata = [](const studentas& a, const studentas& b) {
-        return a.rez > b.rez;
+        return a.rez() > b.rez();
     };
 
     if (rusiavimo_parametras == 1) {
@@ -317,18 +320,18 @@ MatavimoLaikai apdoroti_faila_impl(
 
     // Vargšiukų išvedimas
     for (const studentas& A : vargsiukai) {
-        fr_vargsiukai << left << setw(15) << A.var
-                      << setw(15) << A.pav
-                      << setw(17) << fixed << setprecision(2) << A.rez
-                      << setw(17) << A.rez_med << "\n";
+        fr_vargsiukai << left << setw(15) << A.var()
+                      << setw(15) << A.pav()
+                      << setw(17) << fixed << setprecision(2) << A.rez()
+                      << setw(17) << A.rez_med() << "\n";
     }
 
     // Kietiakų išvedimas
     for (const studentas& A : kietiaku_grupe) {
-        fr_kietiakai << left << setw(15) << A.var
-                     << setw(15) << A.pav
-                     << setw(17) << fixed << setprecision(2) << A.rez
-                     << setw(17) << A.rez_med << "\n";
+        fr_kietiakai << left << setw(15) << A.var()
+                     << setw(15) << A.pav()
+                     << setw(17) << fixed << setprecision(2) << A.rez()
+                     << setw(17) << A.rez_med() << "\n";
     }
 
     fr_vargsiukai.close();
