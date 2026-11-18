@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <array>
+#include <utility>
 
 #include "studentas.h"
 #include "funkcijos.h"
@@ -18,6 +19,7 @@ using std::left;
 using std::setprecision;
 using std::setw;
 
+
 // Apdorojimo funkcijos tipas
 using ApdorojimoFunkcija = MatavimoLaikai (*)(
     const std::string&,
@@ -25,6 +27,7 @@ using ApdorojimoFunkcija = MatavimoLaikai (*)(
     const std::string&,
     int
 );
+
 
 // Vieno failo informacija
 struct Failas {
@@ -318,23 +321,27 @@ int main() {
                 continue;
 
             std::istringstream iss(eilute);
-            studentas A;
+
+            std::string var, pav;
+            std::vector<int> paz;
             int pazymys;
 
-            if (iss >> A.var >> A.pav) {
+            if (iss >> var >> pav) {
                 while (iss >> pazymys)
-                    A.paz.push_back(pazymys);
+                    paz.push_back(pazymys);
 
-                if (A.paz.empty()) {
-                    A.egz = 0;
-                }
-                else {
-                    A.egz = A.paz.back();
-                    A.paz.pop_back();
+                int egz = 0;
+
+                if (!paz.empty()) {
+                    egz = paz.back();
+                    paz.pop_back();
                 }
 
-                paskaiciuoti_rezultatus(A);
-                studentai.push_back(A);
+                studentas A(var, pav, paz, egz);
+
+                A.paskaiciuoti_rezultatus();
+
+                studentai.push_back(std::move(A));
             }
         }
 
@@ -348,13 +355,15 @@ int main() {
         std::uniform_int_distribution<int> dist(1, 10);
 
         while (true) {
-            studentas A;
+            std::string var, pav;
+            std::vector<int> paz;
+            int egz = 0;
 
             cout << "\nIveskite varda: ";
-            cin >> A.var;
+            cin >> var;
 
             cout << "Iveskite pavarde: ";
-            cin >> A.pav;
+            cin >> pav;
 
             if (pasirinkimas == 1) {
                 while (true) {
@@ -362,7 +371,7 @@ int main() {
 
                     cout << "Iveskite namu darbo pazymi: ";
                     cin >> pazymys;
-                    A.paz.push_back(pazymys);
+                    paz.push_back(pazymys);
 
                     cout << "Ar studentas turi dar pazymiu? t/n ";
                     cin >> kl;
@@ -372,7 +381,7 @@ int main() {
                 }
 
                 cout << "Iveskite egzamino pazymi: ";
-                cin >> A.egz;
+                cin >> egz;
             }
             else {
                 int kiek_nd;
@@ -381,20 +390,24 @@ int main() {
                 cin >> kiek_nd;
 
                 for (int i = 0; i < kiek_nd; i++)
-                    A.paz.push_back(dist(gen));
+                    paz.push_back(dist(gen));
 
-                A.egz = dist(gen);
+                egz = dist(gen);
 
                 cout << "Sugeneruoti ND pazymiai: ";
 
-                for (int pazymys : A.paz)
+                for (int pazymys : paz)
                     cout << pazymys << " ";
 
                 cout << "\nSugeneruotas egzamino pazymys: "
-                     << A.egz << "\n";
+                     << egz << "\n";
             }
 
-            paskaiciuoti_rezultatus(A);
+            // Sukuriamas studento objektas
+            studentas A(var, pav, paz, egz);
+
+            A.paskaiciuoti_rezultatus();
+
             studentai.push_back(A);
 
             if (pasirinkimas == 1) {
@@ -433,11 +446,11 @@ int main() {
     cout << std::string(plotis, '-') << "\n";
 
     for (const studentas& A : studentai) {
-        cout << "|" << left << setw(15) << A.pav
-             << "|" << left << setw(15) << A.var
+        cout << "|" << left << setw(15) << A.pav()
+             << "|" << left << setw(15) << A.var()
              << "|" << left << setw(17) << fixed
-             << setprecision(2) << A.rez
-             << "|" << left << setw(17) << A.rez_med
+             << setprecision(2) << A.rez()
+             << "|" << left << setw(17) << A.rez_med()
              << "|\n";
     }
 
