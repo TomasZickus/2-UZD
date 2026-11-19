@@ -1,4 +1,4 @@
-## Programos versijų release'ų aprašymas:
+# Programos v0.1 - v1.0 versijų release'ų aprašymas
 v0.1 – Duomenų nuskaitymas iš failo
 - Programa papildyta galimybe nuskaityti studentų duomenis iš tekstinio failo.
 - Studentai išvedami surūšiuoti pagal vardą arba pavardę, tvarkingai išlygiuojant rezultatų stulpelius.
@@ -19,7 +19,7 @@ v1.0 – Studentų skirstymo optimizavimas ir galutinė programos versija
 - Pritaikomi efektyvesni standartinės bibliotekos algoritmai, siekiant optimizuoti skirstymą naudojant vector.
 - Parengiama galutinė tvarkinga GitHub repozitorija, išsamus README.md, naudojimosi ir diegimo instrukcijos bei CMakeLists.txt arba Makefile.
 
-## Programos įdiegimas ir kompiliavimas
+# Programos įdiegimas ir kompiliavimas
 
 Programai sukompiliuoti reikalingi:
 - C++17 standartą palaikantis C++ kompiliatorius (GCC, Clang arba MSVC).
@@ -43,9 +43,10 @@ cmake --build build
 5. Paleiskite sukurtą vykdomąjį failą (Windows aplinkoje – `build/programa.exe`).
 
 
-## Programos v1.0 versijos spartos testavimas, taikant skirtingas grupavimo strategijas
+# v1.0 versija
+## Spartos testavimas, taikant skirtingas grupavimo strategijas
 
-### Testavimo sistemos parametrai (prieš atliekant visus testus):
+#### Testavimo sistemos parametrai (prieš atliekant visus testus)
 
 <img width="1315" height="867" alt="CPU_2026_11_05" src="https://github.com/user-attachments/assets/889b1e1f-2c9f-4633-b6ca-cedf1fa84b04" />
 <img width="1311" height="891" alt="RAM_2026_11_05" src="https://github.com/user-attachments/assets/596f93d8-e849-4989-b4f6-11d68defc174" />
@@ -55,7 +56,7 @@ Iš pradžių sparta buvo testuojama tik pagal 1 ir 2 strategijas (viena po kito
 
 Abiems strategijoms atlikta po analogišką testą. Jo metu visi bandymai atlikti su tais pačiais penkiais skirtingo dydžio failais, kiekvienam iš jų naudojant du skirtingus konteinerių tipus - vector ir list. Kiekvieno bandymo metu buvo atliekamas 4 atskirų operacijų - nuskaitymo, grupavimo, rūšiavimo, išvedimo laiko - matavimas. Kiekvienas bandymas (kiekvienam iš failų ir konteinerių tipų) pakartotas po 3 kartus. Iš tų 3 kartų apskaičiuoti vidutiniai kiekvienos operacijos veikimo laikai ir iš jų susumuotas bendras vidutinis veikimo laikas.
 
-### 1 ir 2 strategijų testavimo rezultatai:
+### 1 ir 2 strategijų testavimo rezultatai
 
 1 strategija:
 
@@ -87,13 +88,13 @@ Abiems strategijoms atlikta po analogišką testą. Jo metu visi bandymai atlikt
 | studentai_10m.txt | 10 000 000 | vector | - | - | - | - | - |
 | studentai_10m.txt | 10 000 000 | list | - | - | - | - | - |
 
-Pastaba: 2 strategijos bandymų su didžiausiais failais įgyvendinimo iki galo nebesulaukiau, kadangi tai truko neadekvačiai ilgą laiką. Pagal pilnai įvykdytus bandymus su mažesniais failais akivaizdu, kad to stabdis šioje strategijoje - būtent studentų grupavimo etapas naudojant vektorių.
+_Pastaba: 2 strategijos bandymų su didžiausiais failais įgyvendinimo iki galo nebesulaukiau, kadangi tai truko neadekvačiai ilgą laiką. Pagal pilnai įvykdytus bandymus su mažesniais failais akivaizdu, kad to stabdis šioje strategijoje - būtent studentų grupavimo etapas naudojant vektorių._
 
 Išvada iš 1 ir 2 strategijų palyginimo: 1 strategijos veikimas žymiai spartesnis vector konteinerio atveju. Nors list atveju sparta skiriasi mažai, tačiau didžiulis vector skirtumas nulemia tai, kad bendras 1 strategijos veikimas yra žymiai spartesnis.
 
 Kadangi 1 strategija veikia sparčiau, tai pagal instrukcijos reikalavimus 3 strategijos realizacijai pasirinkau būtent ją. Taigi, 3 strategija yra optimizuota 1 strategija. Joje panaudojau std::remove_copy_if algoritmą. Po atliktų kodo pakeitimų, atlikau analogišką pakartotinį 1 strategijos spartos matavimą ir jo rezultatus palyginau su išmatuota naujosios 3 strategijos sparta. Laikantis instrukcijos reikalavimų, į rezultatus įtraukti tik vector konteinerio matavimai.
 
-### 1 ir 3 strategijų testavimo rezultatai:
+### 1 ir 3 strategijų testavimo rezultatai
 
 1 strategija:
 
@@ -116,3 +117,27 @@ Kadangi 1 strategija veikia sparčiau, tai pagal instrukcijos reikalavimus 3 str
 | studentai_10m.txt | 10 000 000 | vector | 30.11702 | 5.55241 | 53.27708 | 23.31548 | 112.26198 |
 
 Išvada iš 1 ir 3 strategijų palyginimo: std::remove_copy_if šiuo atveju nepaspartino grupavimo. Didesniuose failuose 3 strategija buvo lėtesnė. Tikėtina, kad tam įtakos turėjo du perėjimai per pradinį konteinerį, lyginant su vienu perėjimu 1 strategijoje.
+
+
+# v1.1 versija
+## 1 strategijos veikimo spartos palyginimas ant vector, taikant struct ir class
+
+Buvo palyginta programos veikimo sparta pagal **struct** ir **class**, taikant praeitoje užduoties dalyje (v1.0) nustatytą greičiausią (1-ąją) strategiją. Naudotas vienas konkretus konteineris - vector. Palyginimas atliktas su 100 tūkst. ir 1 mln. įrašų failais, kaip reikalaujama instrukcijoje.
+
+_Pastaba: Struct klasės rezultatai nukopijuoti iš ankstesnėje realizacijoje atlikto spartos matavimo (iš praeitos užduoties - v1.0), kadangi struct kodas nebesikeitė._
+
+### Struct ir Class testavimo rezultatai
+
+Struct:
+
+| Failas | Įrašų skaičius | Konteineris | Nuskaitymas (s) | Grupavimas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
+|---|---:|---|---:|---:|---:|---:|---:|
+| studentai_100k.txt | 100 000 | vector | 0.27510 | 0.05078 | 0.27304 | 0.21201 | 0.81093 |
+| studentai_1m.txt | 1 000 000 | vector | 2.35079 | 0.52115 | 3.70065 | 1.98832 | 8.56090 |
+
+Class:
+
+| Failas | Įrašų skaičius | Konteineris | Nuskaitymas (s) | Grupavimas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
+|---|---:|---|---:|---:|---:|---:|---:|
+| studentai_100k.txt | 100 000 | vector | 0.39024 | 0.05723 | 0.28865 | 0.24340 | 0.97952 |
+| studentai_1m.txt | 1 000 000 | vector | 3.51515 | 0.52693 | 3.85832 | 2.39921 | 10.29962 |
