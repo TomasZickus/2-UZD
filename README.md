@@ -90,7 +90,7 @@ Abiems strategijoms atlikta po analogišką testą. Jo metu visi bandymai atlikt
 
 _Pastaba: 2 strategijos bandymų su didžiausiais failais įgyvendinimo iki galo nebesulaukiau, kadangi tai truko neadekvačiai ilgą laiką. Pagal pilnai įvykdytus bandymus su mažesniais failais akivaizdu, kad to stabdis šioje strategijoje - būtent studentų grupavimo etapas naudojant vektorių._
 
-Išvada iš 1 ir 2 strategijų palyginimo: 1 strategijos veikimas žymiai spartesnis vector konteinerio atveju. Nors list atveju sparta skiriasi mažai, tačiau didžiulis vector skirtumas nulemia tai, kad bendras 1 strategijos veikimas yra žymiai spartesnis.
+**Išvada iš 1 ir 2 strategijų palyginimo:** 1 strategijos veikimas žymiai spartesnis vector konteinerio atveju. Nors list atveju sparta skiriasi mažai, tačiau didžiulis vector skirtumas nulemia tai, kad bendras 1 strategijos veikimas yra žymiai spartesnis.
 
 Kadangi 1 strategija veikia sparčiau, tai pagal instrukcijos reikalavimus 3 strategijos realizacijai pasirinkau būtent ją. Taigi, 3 strategija yra optimizuota 1 strategija. Joje panaudojau std::remove_copy_if algoritmą. Po atliktų kodo pakeitimų, atlikau analogišką pakartotinį 1 strategijos spartos matavimą ir jo rezultatus palyginau su išmatuota naujosios 3 strategijos sparta. Laikantis instrukcijos reikalavimų, į rezultatus įtraukti tik vector konteinerio matavimai.
 
@@ -116,7 +116,7 @@ Kadangi 1 strategija veikia sparčiau, tai pagal instrukcijos reikalavimus 3 str
 | studentai_1m.txt | 1 000 000 | vector | 2.28487 | 0.56047 | 3.60371 | 1.94276 | 8.39181 |
 | studentai_10m.txt | 10 000 000 | vector | 30.11702 | 5.55241 | 53.27708 | 23.31548 | 112.26198 |
 
-Išvada iš 1 ir 3 strategijų palyginimo: std::remove_copy_if šiuo atveju nepaspartino grupavimo. Didesniuose failuose 3 strategija buvo lėtesnė. Tikėtina, kad tam įtakos turėjo du perėjimai per pradinį konteinerį, lyginant su vienu perėjimu 1 strategijoje.
+**Išvada iš 1 ir 3 strategijų palyginimo:** std::remove_copy_if šiuo atveju nepaspartino grupavimo. Didesniuose failuose 3 strategija buvo lėtesnė. Tikėtina, kad tam įtakos turėjo du perėjimai per pradinį konteinerį, lyginant su vienu perėjimu 1 strategijoje.
 
 
 # v1.1 versija
@@ -141,3 +141,5 @@ Class:
 |---|---:|---|---:|---:|---:|---:|---:|
 | studentai_100k.txt | 100 000 | vector | 0.39024 | 0.05723 | 0.28865 | 0.24340 | 0.97952 |
 | studentai_1m.txt | 1 000 000 | vector | 3.51515 | 0.52693 | 3.85832 | 2.39921 | 10.29962 |
+
+**Išvada iš struct ir class spartos palyginimo:** Nors laikų skirtumas visuose etapuose nėra labai žymus, tačiau visuose etapuose greitesnė buvo struct konstrukcijos realizacija.
