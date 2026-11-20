@@ -143,3 +143,53 @@ Class:
 | studentai_1m.txt | 1 000 000 | vector | 3.51515 | 0.52693 | 3.85832 | 2.39921 | 10.29962 |
 
 **Išvada iš struct ir class spartos palyginimo:** Nors laikų skirtumas visuose etapuose nėra labai žymus, tačiau visuose etapuose greitesnė buvo struct konstrukcijos realizacija.
+
+## Skirtingų kompiliatoriaus optimizavimo lygių spartos palyginimas pagal Struct ir Class
+
+### Optimizavimo lygių spartos testavimo rezultatai pagal Struct ir Class realizacijas
+
+**Struct realizacija**
+
+100 000 įrašų failas:
+| Optimizavimo lygis | Nuskaitymas (s) | Grupavimas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
+|---|---:|---:|---:|---:|---:|
+| O1 | 0.30592 | 0.02664 | 0.04050 | 0.34826 | 0.72132 |
+| O2 | 0.16425 | 0.02172 | 0.03499 | 0.29276 | 0.51372 |
+| O3 | 0.19815 | 0.03133 | 0.02794 | 0.23729 | 0.49471 |
+
+1 000 000 įrašų failas:
+| Optimizavimo lygis | Nuskaitymas (s) | Grupavimas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
+|---|---:|---:|---:|---:|---:|
+| O1 | 2.33725 | 0.21954 | 0.38021 | 2.29916 | 5.23615 |
+| O2 | 2.25304 | 0.20890 | 0.37836 | 2.15637 | 4.99666 |
+| O3 | 1.33876 | 0.20630 | 0.35567 | 2.04976 | 3.95049 |
+
+Vykdomųjų failų dydžiai:
+| Optimizavimo lygis | EXE failo dydis (kB) |
+|---|---:|
+| O1 | 186.08 |
+| O2 | 156.32 |
+| O3 | 204.72 |
+
+**Class realizacija**
+
+100 000 įrašų failas:
+| Optimizavimo lygis | Nuskaitymas (s) | Grupavimas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
+|---|---:|---:|---:|---:|---:|
+| O1 | 0.28593 | 0.02327 | 0.03132 | 0.29817 | 0.63869 |
+| O2 | 0.18485 | 0.02697 | 0.03529 | 0.31227 | 0.55938 |
+| O3 | 0.20613 | 0.02551 | 0.03571 | 0.31079 | 0.57814 |
+
+1 000 000 įrašų failas:
+| Optimizavimo lygis | Nuskaitymas (s) | Grupavimas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
+|---|---:|---:|---:|---:|---:|
+| O1 | 1.58691 | 0.22600 | 0.36510 | 2.12211 | 4.30012 |
+| O2 | 1.49328 | 0.23700 | 0.36976 | 1.98763 | 4.08767 |
+| O3 | 1.46845 | 0.21716 | 0.38472 | 2.13742 | 4.20775 |
+
+Vykdomųjų failų dydžiai:
+| Optimizavimo lygis | EXE failo dydis (kB) |
+|---|---:|
+| O1 | 152.67 |
+| O2 | 143.40 |
+| O3 | 151.45 |
