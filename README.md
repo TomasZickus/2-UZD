@@ -146,6 +146,8 @@ Class:
 
 ## Skirtingų kompiliatoriaus optimizavimo lygių spartos palyginimas pagal Struct ir Class
 
+Eksperimento sąlygos: Visi bandymai atlikti naudojant std::vector konteinerį ir 1-ąją studentų dalijimo į dvi kategorijas strategiją. Testavimui naudoti tie patys 100 000 ir 1 000 000 įrašų failai. Kiekviena programos realizacija (struct ir class) sukompiliuota naudojant tris skirtingus optimizavimo lygius: `-O1`, `-O2` ir `-O3`. Kiekvieno optimizavimo lygio atveju į rezultatus įtraukti ir atitinkamų vykdomųjų failų (.exe) dydžiai.
+
 ### Optimizavimo lygių spartos testavimo rezultatai pagal Struct ir Class realizacijas
 
 **Struct realizacija**
@@ -193,3 +195,11 @@ Vykdomųjų failų dydžiai:
 | O1 | 152.67 |
 | O2 | 143.40 |
 | O3 | 151.45 |
+
+**Išvados iš optimizavimo lygių spartos palyginimo:**
+
+Struct atveju sparčiausias veikimas abiejų dydžių failams gautas naudojant O3;
+
+Class atveju sparčiausias veikimas abiejų dydžių failams gautas naudojant O2;
+
+Abiejų realizacijų atveju mažiausio dydžio .exe failai gauti naudojant O2.
