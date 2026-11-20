@@ -1,23 +1,30 @@
-# Programos v0.1 - v1.0 versijų release'ų aprašymas
-v0.1 – Duomenų nuskaitymas iš failo
+# Programos v0.1 - v1.1 versijų release'ų aprašymas
+**v0.1** – Duomenų nuskaitymas iš failo
 - Programa papildyta galimybe nuskaityti studentų duomenis iš tekstinio failo.
 - Studentai išvedami surūšiuoti pagal vardą arba pavardę, tvarkingai išlygiuojant rezultatų stulpelius.
 
-v0.2 – Studentų skirstymas ir programos spartos analizė
+**v0.2** – Studentų skirstymas ir programos spartos analizė
 - Sukuriami skirtingo dydžio studentų duomenų failai (nuo 1 000 iki 10 000 000 įrašų).
 - Studentai suskirstomi į dvi kategorijas pagal galutinį balą: mažiau nei 5 ir ne mažiau nei 5.
 - Atliekamas programos spartos tyrimas: matuojamas failų kūrimo, duomenų nuskaitymo, studentų skirstymo ir rezultatų įrašymo laikas.
 - Atliekamas kodo reorganizavimas, naudojant atskirus .h ir .cpp failus.
 
-v0.3 – vector ir list konteinerių spartos palyginimas
+**v0.3** – vector ir list konteinerių spartos palyginimas
 - Palyginamas programos veikimo greitis naudojant std::vector ir std::list konteinerius.
 - Atliekami papildomi studentų skirstymo ir duomenų įrašymo į failus spartos matavimai.
 - Tyrimo rezultatai aprašomi README.md faile.
 
-v1.0 – Studentų skirstymo optimizavimas ir galutinė programos versija
+**v1.0** – Studentų skirstymo optimizavimas ir galutinė 1 užduoties programos versija
 - Ištiriamos ir palyginamos trys studentų skirstymo į kategorijas strategijos, naudojant vector ir list.
 - Pritaikomi efektyvesni standartinės bibliotekos algoritmai, siekiant optimizuoti skirstymą naudojant vector.
 - Parengiama galutinė tvarkinga GitHub repozitorija, išsamus README.md, naudojimosi ir diegimo instrukcijos bei CMakeLists.txt arba Makefile.
+
+**v1.1** – Perėjimas nuo struct prie class ir programos spartos palyginimas
+- Studentų duomenų struktūra struct pakeičiama į class, pritaikant objektinio programavimo principus: inkapsuliaciją, konstruktorius, destruktorių, geterius ir seterius.
+- Atnaujinamas programos kodas, pritaikant jį darbui su naujo tipo Studentas klasės objektais.
+- Palyginama ankstesnės (struct) ir naujosios (class) programos versijų veikimo sparta, naudojant tą patį konteinerį, efektyviausią studentų skirstymo strategiją ir 100 000 bei 1 000 000 įrašų failus.
+- Atliekama eksperimentinė analizė, naudojant skirtingus kompiliatoriaus optimizavimo lygius (-O1, -O2, -O3), matuojant programos veikimo laiką ir vykdomųjų .exe failų dydžius.
+- Gauti tyrimų rezultatai pateikiami ir pakomentuojami README.md faile. Parengiama nauja repozitorija, išsaugant ankstesnio darbo Git istoriją, ir sukuriamas v1.1 leidimas (release).
 
 # Programos įdiegimas ir kompiliavimas
 
