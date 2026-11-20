@@ -202,4 +202,6 @@ Struct atveju sparčiausias veikimas abiejų dydžių failams gautas naudojant O
 
 Class atveju sparčiausias veikimas abiejų dydžių failams gautas naudojant O2;
 
-Abiejų realizacijų atveju mažiausio dydžio .exe failai gauti naudojant O2.
+Abiejų realizacijų atveju mažiausio dydžio .exe failai gauti naudojant O2;
+
+Vykdomųjų failų dydžiai visiems optimizavimo lygiams dirbant su class gavosi mažesni, negu su dirbant su struct.
